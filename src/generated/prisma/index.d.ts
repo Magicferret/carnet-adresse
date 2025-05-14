@@ -896,8 +896,6 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     avatarSlug: string | null
-    avatarColor: string | null
-    favorite: boolean | null
   }
 
   export type ContactMaxAggregateOutputType = {
@@ -907,8 +905,6 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     avatarSlug: string | null
-    avatarColor: string | null
-    favorite: boolean | null
   }
 
   export type ContactCountAggregateOutputType = {
@@ -918,8 +914,6 @@ export namespace Prisma {
     email: number
     phone: number
     avatarSlug: number
-    avatarColor: number
-    favorite: number
     _all: number
   }
 
@@ -939,8 +933,6 @@ export namespace Prisma {
     email?: true
     phone?: true
     avatarSlug?: true
-    avatarColor?: true
-    favorite?: true
   }
 
   export type ContactMaxAggregateInputType = {
@@ -950,8 +942,6 @@ export namespace Prisma {
     email?: true
     phone?: true
     avatarSlug?: true
-    avatarColor?: true
-    favorite?: true
   }
 
   export type ContactCountAggregateInputType = {
@@ -961,8 +951,6 @@ export namespace Prisma {
     email?: true
     phone?: true
     avatarSlug?: true
-    avatarColor?: true
-    favorite?: true
     _all?: true
   }
 
@@ -1059,8 +1047,6 @@ export namespace Prisma {
     email: string
     phone: string
     avatarSlug: string | null
-    avatarColor: string | null
-    favorite: boolean
     _count: ContactCountAggregateOutputType | null
     _avg: ContactAvgAggregateOutputType | null
     _sum: ContactSumAggregateOutputType | null
@@ -1089,8 +1075,6 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     avatarSlug?: boolean
-    avatarColor?: boolean
-    favorite?: boolean
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1100,8 +1084,6 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     avatarSlug?: boolean
-    avatarColor?: boolean
-    favorite?: boolean
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1111,8 +1093,6 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     avatarSlug?: boolean
-    avatarColor?: boolean
-    favorite?: boolean
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectScalar = {
@@ -1122,11 +1102,9 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     avatarSlug?: boolean
-    avatarColor?: boolean
-    favorite?: boolean
   }
 
-  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "avatarSlug" | "avatarColor" | "favorite", ExtArgs["result"]["contact"]>
+  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "avatarSlug", ExtArgs["result"]["contact"]>
 
   export type $ContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contact"
@@ -1138,8 +1116,6 @@ export namespace Prisma {
       email: string
       phone: string
       avatarSlug: string | null
-      avatarColor: string | null
-      favorite: boolean
     }, ExtArgs["result"]["contact"]>
     composites: {}
   }
@@ -1569,8 +1545,6 @@ export namespace Prisma {
     readonly email: FieldRef<"Contact", 'String'>
     readonly phone: FieldRef<"Contact", 'String'>
     readonly avatarSlug: FieldRef<"Contact", 'String'>
-    readonly avatarColor: FieldRef<"Contact", 'String'>
-    readonly favorite: FieldRef<"Contact", 'Boolean'>
   }
     
 
@@ -1952,9 +1926,7 @@ export namespace Prisma {
     lastName: 'lastName',
     email: 'email',
     phone: 'phone',
-    avatarSlug: 'avatarSlug',
-    avatarColor: 'avatarColor',
-    favorite: 'favorite'
+    avatarSlug: 'avatarSlug'
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -1996,13 +1968,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2022,8 +1987,6 @@ export namespace Prisma {
     email?: StringFilter<"Contact"> | string
     phone?: StringFilter<"Contact"> | string
     avatarSlug?: StringNullableFilter<"Contact"> | string | null
-    avatarColor?: StringNullableFilter<"Contact"> | string | null
-    favorite?: BoolFilter<"Contact"> | boolean
   }
 
   export type ContactOrderByWithRelationInput = {
@@ -2033,23 +1996,19 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     avatarSlug?: SortOrderInput | SortOrder
-    avatarColor?: SortOrderInput | SortOrder
-    favorite?: SortOrder
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    email?: string
-    phone?: string
     AND?: ContactWhereInput | ContactWhereInput[]
     OR?: ContactWhereInput[]
     NOT?: ContactWhereInput | ContactWhereInput[]
     firstName?: StringFilter<"Contact"> | string
     lastName?: StringFilter<"Contact"> | string
+    email?: StringFilter<"Contact"> | string
+    phone?: StringFilter<"Contact"> | string
     avatarSlug?: StringNullableFilter<"Contact"> | string | null
-    avatarColor?: StringNullableFilter<"Contact"> | string | null
-    favorite?: BoolFilter<"Contact"> | boolean
-  }, "id" | "email" | "phone">
+  }, "id">
 
   export type ContactOrderByWithAggregationInput = {
     id?: SortOrder
@@ -2058,8 +2017,6 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     avatarSlug?: SortOrderInput | SortOrder
-    avatarColor?: SortOrderInput | SortOrder
-    favorite?: SortOrder
     _count?: ContactCountOrderByAggregateInput
     _avg?: ContactAvgOrderByAggregateInput
     _max?: ContactMaxOrderByAggregateInput
@@ -2077,8 +2034,6 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Contact"> | string
     phone?: StringWithAggregatesFilter<"Contact"> | string
     avatarSlug?: StringNullableWithAggregatesFilter<"Contact"> | string | null
-    avatarColor?: StringNullableWithAggregatesFilter<"Contact"> | string | null
-    favorite?: BoolWithAggregatesFilter<"Contact"> | boolean
   }
 
   export type ContactCreateInput = {
@@ -2087,8 +2042,6 @@ export namespace Prisma {
     email: string
     phone: string
     avatarSlug?: string | null
-    avatarColor?: string | null
-    favorite?: boolean
   }
 
   export type ContactUncheckedCreateInput = {
@@ -2098,8 +2051,6 @@ export namespace Prisma {
     email: string
     phone: string
     avatarSlug?: string | null
-    avatarColor?: string | null
-    favorite?: boolean
   }
 
   export type ContactUpdateInput = {
@@ -2108,8 +2059,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     avatarSlug?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarColor?: NullableStringFieldUpdateOperationsInput | string | null
-    favorite?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ContactUncheckedUpdateInput = {
@@ -2119,8 +2068,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     avatarSlug?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarColor?: NullableStringFieldUpdateOperationsInput | string | null
-    favorite?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ContactCreateManyInput = {
@@ -2130,8 +2077,6 @@ export namespace Prisma {
     email: string
     phone: string
     avatarSlug?: string | null
-    avatarColor?: string | null
-    favorite?: boolean
   }
 
   export type ContactUpdateManyMutationInput = {
@@ -2140,8 +2085,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     avatarSlug?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarColor?: NullableStringFieldUpdateOperationsInput | string | null
-    favorite?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ContactUncheckedUpdateManyInput = {
@@ -2151,8 +2094,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     avatarSlug?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarColor?: NullableStringFieldUpdateOperationsInput | string | null
-    favorite?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2194,11 +2135,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -2211,8 +2147,6 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     avatarSlug?: SortOrder
-    avatarColor?: SortOrder
-    favorite?: SortOrder
   }
 
   export type ContactAvgOrderByAggregateInput = {
@@ -2226,8 +2160,6 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     avatarSlug?: SortOrder
-    avatarColor?: SortOrder
-    favorite?: SortOrder
   }
 
   export type ContactMinOrderByAggregateInput = {
@@ -2237,8 +2169,6 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     avatarSlug?: SortOrder
-    avatarColor?: SortOrder
-    favorite?: SortOrder
   }
 
   export type ContactSumOrderByAggregateInput = {
@@ -2295,24 +2225,12 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2360,11 +2278,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2437,14 +2350,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
 

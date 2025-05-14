@@ -1,7 +1,18 @@
+/**
+ * API Routes pour la gestion d'un contact spécifique.
+ * Fournit les endpoints GET, PUT et DELETE pour manipuler un contact par son ID.
+ */
 import { prisma } from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 type Params = { params: { id: string } }
 
+/**
+ * GET /api/contacts/[id]
+ * Récupère un contact spécifique par son ID.
+ * @param {NextRequest} request - Requête entrante
+ * @param {Params} params - Paramètres de la route contenant l'ID
+ * @returns {Promise<NextResponse>} Contact trouvé ou erreur 404/500
+ */
 export async function GET(request: NextRequest, { params }: Params) {
   try {
     const { id: paramId } = params
@@ -20,12 +31,19 @@ export async function GET(request: NextRequest, { params }: Params) {
   }
 }
 
+/**
+ * PUT /api/contacts/[id]
+ * Met à jour un contact existant.
+ * @param {NextRequest} request - Requête contenant les nouvelles données
+ * @param {Params} params - Paramètres de la route contenant l'ID
+ * @returns {Promise<NextResponse>} Contact mis à jour ou erreur 400/500
+ */
 export async function PUT(request: NextRequest, { params }: Params) {
   try {
     const { id: paramId } = params
     const id = parseInt(paramId)
     const body = await request.json()
-    const { firstName, lastName, email, phone, avatarSlug, avatarColor, favorite } = body
+    const { firstName, lastName, email, phone, avatarSlug } = body
 
     if (!firstName || !lastName || !email || !phone) {
       return NextResponse.json({ error: "Champs requis manquants" }, { status: 400 })
@@ -33,7 +51,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
 
     const contact = await prisma.contact.update({
       where: { id },
-      data: { firstName, lastName, email, phone, avatarSlug, avatarColor, favorite },
+      data: { firstName, lastName, email, phone, avatarSlug },
     })
 
     return NextResponse.json(contact)
@@ -42,6 +60,13 @@ export async function PUT(request: NextRequest, { params }: Params) {
   }
 }
 
+/**
+ * DELETE /api/contacts/[id]
+ * Supprime un contact par son ID.
+ * @param {NextRequest} request - Requête entrante
+ * @param {Params} params - Paramètres de la route contenant l'ID
+ * @returns {Promise<NextResponse>} 204 si succès ou erreur 500
+ */
 export async function DELETE(request: NextRequest, { params }: Params) {
   try {
     const { id: paramId } = params

@@ -6,6 +6,4 @@ CREATE TABLE "Contact" (
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "avatarSlug" TEXT,
-    "avatarColor" TEXT,
-    "favorite" BOOLEAN NOT NULL DEFAULT false
 );

@@ -123,9 +123,7 @@ exports.Prisma.ContactScalarFieldEnum = {
   lastName: 'lastName',
   email: 'email',
   phone: 'phone',
-  avatarSlug: 'avatarSlug',
-  avatarColor: 'avatarColor',
-  favorite: 'favorite'
+  avatarSlug: 'avatarSlug'
 };
 
 exports.Prisma.SortOrder = {

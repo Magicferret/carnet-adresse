@@ -1,3 +1,9 @@
+/**
+ * Composant qui affiche la liste des contacts groupés par première lettre.
+ * Gère l'affichage et l'organisation des cartes de contact.
+ */
+"use client"
+
 import { ContactCard } from "@/components/contact-card"
 import type { Contact } from "@/lib/utils"
 
@@ -5,21 +11,23 @@ interface ContactListProps {
   contacts: Contact[]
   onSelect: (contact: Contact) => void
   onDelete: (id: string | number) => void
+  sortField: "firstName" | "lastName"
 }
 
-export function ContactList({ contacts, onSelect, onDelete }: ContactListProps) {
-  // Group contacts by first letter of last name
+export function ContactList({ contacts, onSelect, onDelete, sortField }: ContactListProps) {
+  // Groupe les contacts par première lettre du champ de tri
   const groupedContacts: Record<string, Contact[]> = {}
 
   contacts.forEach(contact => {
-    const firstLetter = contact.lastName.charAt(0).toUpperCase()
+    const value = contact[sortField]
+    const firstLetter = value.charAt(0).toUpperCase()
     if (!groupedContacts[firstLetter]) {
       groupedContacts[firstLetter] = []
     }
     groupedContacts[firstLetter].push(contact)
   })
 
-  // Sort the keys alphabetically
+  // Trie les clés alphabétiquement
   const sortedKeys = Object.keys(groupedContacts).sort()
 
   return (
@@ -36,7 +44,12 @@ export function ContactList({ contacts, onSelect, onDelete }: ContactListProps) 
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {groupedContacts[letter].map(contact => (
-                <ContactCard key={contact.id} contact={contact} onEdit={onSelect} onDelete={onDelete} />
+                <ContactCard
+                  key={contact.id}
+                  contact={contact}
+                  onEdit={onSelect}
+                  onDelete={onDelete}
+                />
               ))}
             </div>
           </div>
