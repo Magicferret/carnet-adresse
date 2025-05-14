@@ -9,14 +9,19 @@ import type { Contact } from "@/lib/utils"
 import { PlusCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 
-
-
 export default function AddressBook() {
   const [contacts, setContacts] = useState<Contact[]>([])
   const fetchContacts = async () => {
-    const response = await fetch("/api/contacts")
-    const data = await response.json()
-    setContacts(data)
+    try {
+      const response = await fetch("/api/contacts")
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des contacts")
+      }
+      const data = await response.json()
+      setContacts(data)
+    } catch (error) {
+      console.error("Erreur:", error)
+    }
   }
   const [searchQuery, setSearchQuery] = useState("")
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
@@ -25,17 +30,19 @@ export default function AddressBook() {
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null)
 
   // Filter contacts based on search query
-  const filteredContacts = contacts.filter((contact) => {
+  const filteredContacts = contacts.filter(contact => {
+    if (!contact || !contact.firstName || !contact.lastName || !contact.email || !contact.phone) {
+      return false
+    }
     const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase()
-    return (
-      fullName.includes(searchQuery.toLowerCase()) ||
-      contact.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      contact.phone.includes(searchQuery)
-    )
+    const query = searchQuery.toLowerCase()
+    return fullName.includes(query) || contact.email.toLowerCase().includes(query) || contact.phone.includes(query)
   })
 
   // Sort contacts based on sort field and order
   const sortedContacts = [...filteredContacts].sort((a, b) => {
+    if (!a[sortField] || !b[sortField]) return 0
+
     const fieldA = a[sortField].toLowerCase()
     const fieldB = b[sortField].toLowerCase()
 
@@ -46,35 +53,71 @@ export default function AddressBook() {
     }
   })
 
-  const handleAddContact = (contact: Omit<Contact, "id">) => {
-    const newContact = {
-      ...contact,
+  const handleAddContact = async (contact: Omit<Contact, "id">) => {
+    try {
+      const response = await fetch("/api/contacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+      })
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout du contact")
+      }
+
+      const newContact = await response.json()
+      setContacts([...contacts, newContact])
+      setIsAddingContact(false)
+    } catch (error) {
+      console.error("Erreur:", error)
     }
-    setContacts([...contacts, newContact])
-    setIsAddingContact(false)
   }
 
-  const handleUpdateContact = (updatedContact: Contact) => {
-    setContacts(contacts.map((contact) => (contact.id === updatedContact.id ? updatedContact : contact)))
-    setSelectedContact(null)
+  const handleUpdateContact = async (updatedContact: Contact) => {
+    try {
+      const response = await fetch(`/api/contacts/${updatedContact.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedContact),
+      })
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour du contact")
+      }
+
+      const updated = await response.json()
+      setContacts(contacts.map(contact => (contact.id === updated.id ? updated : contact)))
+      setSelectedContact(null)
+    } catch (error) {
+      console.error("Erreur:", error)
+    }
   }
 
   const handleContactAdded = () => {
     fetchContacts()
   }
 
-  const handleDeleteContact = async (id: number) => {
-    const confirmed = confirm('Supprimer ce contact ?')
+  const handleDeleteContact = async (id: string | number) => {
+    const confirmed = confirm("Supprimer ce contact ?")
     if (confirmed) {
-      const res = await fetch(`/api/contacts/${id}`, { method: 'DELETE' })
-      if (res.ok) {
-        setContacts(contacts => contacts.filter(c => c.id !== id))
-      } else {
-        console.error("Erreur de la suppression");
+      try {
+        const res = await fetch(`/api/contacts/${id}`, {
+          method: "DELETE",
+        })
+        if (res.ok) {
+          setContacts(contacts => contacts.filter(c => c.id !== id))
+        } else {
+          console.error("Erreur de la suppression")
+        }
+      } catch (error) {
+        console.error("Erreur:", error)
       }
     }
-  };
-
+  }
 
   useEffect(() => {
     fetchContacts()
@@ -85,12 +128,7 @@ export default function AddressBook() {
       <div className="flex flex-col sm:flex-row justify-between gap-4">
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
         <div className="flex items-center gap-4">
-          <SortOptions
-            sortField={sortField}
-            sortOrder={sortOrder}
-            onSortFieldChange={setSortField}
-            onSortOrderChange={setSortOrder}
-          />
+          <SortOptions sortField={sortField} sortOrder={sortOrder} onSortFieldChange={setSortField} onSortOrderChange={setSortOrder} />
           <Button onClick={() => setIsAddingContact(true)}>
             <PlusCircle className="mr-2 h-4 w-4" />
             Add Contact
@@ -102,7 +140,7 @@ export default function AddressBook() {
 
       {(isAddingContact || selectedContact) && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
             <ContactForm
               contact={selectedContact}
               onSubmit={selectedContact ? handleUpdateContact : handleAddContact}

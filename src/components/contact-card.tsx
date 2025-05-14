@@ -8,7 +8,7 @@ import { Edit, Mail, Phone, Trash2 } from "lucide-react"
 interface ContactCardProps {
   contact: Contact
   onEdit: (contact: Contact) => void
-  onDelete: (id: string) => void
+  onDelete: (id: string | number) => void
 }
 
 export function ContactCard({ contact, onEdit, onDelete }: ContactCardProps) {
@@ -49,12 +49,7 @@ export function ContactCard({ contact, onEdit, onDelete }: ContactCardProps) {
           <Edit className="h-4 w-4 mr-1" />
           Edit
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="text-red-500 hover:text-red-700 hover:bg-red-50"
-          onClick={() => onDelete(contact.id)}
-        >
+        <Button variant="outline" size="sm" className="text-red-500 hover:text-red-700 hover:bg-red-50" onClick={() => onDelete(contact.id)}>
           <Trash2 className="h-4 w-4 mr-1" />
           Delete
         </Button>

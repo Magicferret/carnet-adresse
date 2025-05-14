@@ -6,12 +6,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export interface Contact {
-  id?: number
+  id: number
   firstName: string
   lastName: string
   email: string
   phone: string
-  avatarSlug: string
-  avatarColor: string
+  avatarSlug: string | null
+  avatarColor: string | null
   favorite: boolean
+  address?: string
+  notes?: string
 }

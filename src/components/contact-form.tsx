@@ -22,12 +22,16 @@ export function ContactForm({ contact, onSubmit, onCancel }: ContactFormProps) {
     lastName: contact?.lastName || "",
     email: contact?.email || "",
     phone: contact?.phone || "",
-    // avatar: contact?.avatar || "/placeholder.svg?height=100&width=100",
+    avatarSlug: contact?.avatarSlug || null,
+    avatarColor: contact?.avatarColor || null,
+    favorite: contact?.favorite || false,
+    address: contact?.address || "",
+    notes: contact?.notes || "",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
