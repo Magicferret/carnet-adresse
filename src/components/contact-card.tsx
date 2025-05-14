@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import type { Contact } from "@/lib/utils"
 import { Edit, Mail, Phone, Trash2 } from "lucide-react"
-import Image from "next/image"
 
 interface ContactCardProps {
   contact: Contact
@@ -18,12 +17,12 @@ export function ContactCard({ contact, onEdit, onDelete }: ContactCardProps) {
       <CardContent className="pt-6">
         <div className="flex flex-col items-center mb-4">
           <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
-            <Image
+            {/* <Image
               src={contact.avatar || "/placeholder.svg"}
               alt={`${contact.firstName} ${contact.lastName}`}
               fill
               className="object-cover"
-            />
+            /> */}
           </div>
           <h3 className="text-xl font-semibold">{`${contact.firstName} ${contact.lastName}`}</h3>
         </div>
