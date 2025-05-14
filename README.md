@@ -1,41 +1,104 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Carnet d'Adresses
 
-## Getting Started
+Une application de gestion de contacts moderne et intuitive, développée avec les technologies actuelles utilisées dans l'entreprise.
 
-First, run the development server:
+## 🚀 Technologies Utilisées
 
+- **Next.js 14** : Framework React moderne avec support du Server Side Rendering et des API Routes
+- **TypeScript** : Pour un développement plus robuste et une meilleure maintenabilité
+- **Tailwind CSS** : Framework CSS utility-first pour un design moderne et responsive
+- **Prisma** : ORM moderne pour une gestion simplifiée de la base de données
+- **SQLite** : Base de données légère et performante, parfaite pour le développement
+- **SWC** : Compilateur JavaScript/TypeScript rapide pour optimiser le développement
+
+## 🛠️ Installation
+
+1. Clonez le repository :
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [url-du-repo]
+cd carnet-adresse
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Installez les dépendances :
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configurez la base de données :
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Lancez l'application en mode développement :
+```bash
+npm run dev
+```
 
-## Learn More
+L'application sera accessible à l'adresse [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ Choix Techniques et Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Pourquoi ces technologies ?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js** : Choisi pour sa performance, son excellent support du SSR et sa compatibilité avec l'écosystème React déjà utilisé dans l'entreprise.
 
-## Deploy on Vercel
+- **Prisma + SQLite** :
+  - Prisma offre une expérience développeur exceptionnelle avec son système de types automatique
+  - SQLite permet un développement rapide sans configuration complexe
+  - Migration facile vers PostgreSQL ou MySQL en production si nécessaire
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **TypeScript** : Apporte la sécurité de type et améliore la maintenabilité du code, en ligne avec les standards de l'entreprise.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# carnet-adresse
-Test technique effectué dans le cadre d'une candidature
->>>>>>> 344abdb0405e3fe5b060b597aae1d7b6eb956ddc
+### Architecture du Projet
+
+- `/src` : Code source principal de l'application
+  - `/app` : Routes et pages Next.js
+  - `/components` : Composants React réutilisables
+  - `/lib` : Utilitaires et configurations
+  - `/hooks` : Custom hooks React
+
+- `/prisma` : Schéma de base de données et migrations
+- `/public` : Assets statiques (images, avatars)
+
+### Fonctionnalités Principales
+
+- ✨ Interface utilisateur moderne et responsive
+- 📝 CRUD complet pour la gestion des contacts
+- 🔍 Recherche et filtrage des contacts
+- 🎨 Système d'avatars personnalisables
+- ⚡ Performance optimisée avec le SSR
+
+## 🧪 Tests
+
+Pour lancer les tests :
+
+```bash
+npm run test
+```
+
+## 📦 Build et Déploiement
+
+Pour construire l'application pour la production :
+
+```bash
+npm run build
+```
+
+Pour lancer l'application en production :
+
+```bash
+npm run start
+```
+
+## 🐳 Docker
+
+L'application peut également être lancée avec Docker :
+
+```bash
+docker-compose up
+```
+
+## 📝 License
+
+[MIT](LICENSE)
