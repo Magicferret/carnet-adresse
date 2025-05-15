@@ -27,6 +27,8 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
+RUN apk add --no-cache bash
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -41,9 +43,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/scripts/init-db.sh ./scripts/init-db.sh
 
-# Copy the database if it exists (for SQLite)
-COPY --from=builder /app/*.db ./
+# Ensure the database directory exists and has correct permissions
+RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
 
 USER nextjs
 
@@ -51,5 +54,7 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
+ENV DATABASE_URL="file:/app/data/dev.db"
 
-CMD ["node", "server.js"]
+# Initialize database and start the application
+CMD ["/bin/bash", "-c", "chmod +x ./scripts/init-db.sh && ./scripts/init-db.sh && node server.js"]
