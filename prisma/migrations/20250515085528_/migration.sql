@@ -5,5 +5,5 @@ CREATE TABLE "Contact" (
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
-    "avatarSlug" TEXT,
+    "avatarSlug" TEXT
 );

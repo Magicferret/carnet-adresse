@@ -18,6 +18,7 @@ const customJestConfig = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  globalSetup: '<rootDir>/jest.global-setup.js',
 }
 
 module.exports = createJestConfig(customJestConfig)

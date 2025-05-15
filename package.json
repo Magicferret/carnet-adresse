@@ -12,7 +12,8 @@
     "test:api": "jest --config jest.config.api.js",
     "test:watch": "jest --watch",
     "test:api:coverage": "jest --config jest.config.api.js --coverage",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "postinstall": "if [ ! -f .env ]; then cp env.example .env; fi"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",
