@@ -24,7 +24,7 @@ cd carnet-adresse
 npm install
 ```
 
-3. Configurez la base de données :
+4. Configurez la base de données :
 ```bash
 # Génère le client Prisma
 npx prisma generate
@@ -36,7 +36,7 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-4. Lancez l'application en mode développement :
+5. Lancez l'application en mode développement :
 ```bash
 npm run dev
 ```
@@ -51,33 +51,8 @@ Le projet utilise des variables d'environnement pour la configuration. Voici les
 
 ```env
 # Base de données
-DATABASE_URL="file:./sqlite.db"
-
-# Variables d'environnement Next.js
-NEXT_PUBLIC_API_URL="http://localhost:3000/api"
-
-# Variables pour les tests (optionnel)
-TEST_DATABASE_URL="file:./test.db"
+DATABASE_URL="file:./dev.db"
 ```
-
-### Mode de Développement vs Production
-
-- **Développement** : Utilisez `DATABASE_URL="file:./sqlite.db"`
-- **Production** : Configurez selon votre environnement
-- **Tests** : Utilisez une base de données séparée avec `TEST_DATABASE_URL`
-
-## 🏗️ Choix Techniques et Architecture
-
-### Pourquoi ces technologies ?
-
-- **Next.js** : Choisi pour sa performance, son excellent support du SSR et sa compatibilité avec l'écosystème React déjà utilisé dans l'entreprise.
-
-- **Prisma + SQLite** :
-  - Prisma offre une expérience développeur exceptionnelle avec son système de types automatique
-  - SQLite permet un développement rapide sans configuration complexe
-  - Migration facile vers PostgreSQL ou MySQL en production si nécessaire
-
-- **TypeScript** : Apporte la sécurité de type et améliore la maintenabilité du code, en ligne avec les standards de l'entreprise.
 
 ### Architecture du Projet
 
