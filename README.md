@@ -65,13 +65,6 @@ DATABASE_URL="file:./dev.db"
 - `/prisma` : Schéma de base de données et migrations
 - `/public` : Assets statiques (images, avatars)
 
-### Fonctionnalités Principales
-
-- ✨ Interface utilisateur moderne et responsive
-- 📝 CRUD complet pour la gestion des contacts
-- 🔍 Recherche et filtrage des contacts
-- 🎨 Système d'avatars personnalisables
-- ⚡ Performance optimisée avec le SSR
 
 ## 🧪 Tests
 
