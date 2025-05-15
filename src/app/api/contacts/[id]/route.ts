@@ -15,7 +15,7 @@ type Params = { params: { id: string } }
  */
 export async function GET(request: NextRequest, { params }: Params) {
   try {
-    const { id: paramId } = params
+    const { id: paramId } = await params
     const id = parseInt(paramId)
     const contact = await prisma.contact.findUnique({
       where: { id },
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest, { params }: Params) {
  */
 export async function PUT(request: NextRequest, { params }: Params) {
   try {
-    const { id: paramId } = params
+    const { id: paramId } = await params
     const id = parseInt(paramId)
     const body = await request.json()
     const { firstName, lastName, email, phone, avatarSlug } = body
@@ -69,7 +69,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
  */
 export async function DELETE(request: NextRequest, { params }: Params) {
   try {
-    const { id: paramId } = params
+    const { id: paramId } = await params
     const id = parseInt(paramId)
     await prisma.contact.delete({
       where: { id },
