@@ -8,23 +8,12 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/carnet_adresses
       - NODE_ENV=production
-    depends_on:
-      - db
-    restart: unless-stopped
-
-  db:
-    image: postgres:16-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=carnet_adresses
+      - DATABASE_URL=file:/app/sqlite.db
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - sqlite_data:/app
     restart: unless-stopped
 
 volumes:
-  postgres_data:
+  sqlite_data:
+    driver: local

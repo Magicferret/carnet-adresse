@@ -1,36 +1,55 @@
-# Dépendances
+# Dependencies
 node_modules
-npm-debug.log
-yarn-debug.log
-yarn-error.log
+.pnp
+.pnp.js
 
-# Fichiers de build
+# Testing
+coverage
+
+# Next.js
 .next
 out
-dist
+
+# Production
 build
 
-# Fichiers de développement
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+.env
+
+# IDE
+.idea
+.vscode
+
+# Git
 .git
 .gitignore
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Fichiers de développement
 README.md
 *.md
-.vscode
-.idea
 
 # Tests
-coverage
 __tests__
 *.test.*
 jest.config.*
 jest.setup.*
 
 # Autres
-.DS_Store
 *.log
 tmp/
 temp/

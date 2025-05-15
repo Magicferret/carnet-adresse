@@ -1,7 +1,3 @@
-// Learn more: https://jestjs.io/docs/configuration#setupfilesafterenv-array
-
-// Used for __tests__/testing-library.js
-// Learn more: https://github.com/testing-library/jest-dom
 require('@testing-library/jest-dom')
 
 // Mock Next.js router
@@ -25,4 +21,19 @@ jest.mock('next/navigation', () => ({
 // Reset mocks before each test
 beforeEach(() => {
   jest.clearAllMocks()
+})
+
+// Mock window.matchMedia
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
 })
