@@ -19,21 +19,12 @@ git clone [url-du-repo]
 cd carnet-adresse
 ```
 
-2. Configurez l'environnement :
-```bash
-# Créez votre fichier .env à partir de l'exemple
-cp .env.example .env
-
-# Modifiez les variables d'environnement si nécessaire
-# Par défaut, la configuration utilise SQLite en local
-```
-
-3. Installez les dépendances :
+2. Installez les dépendances :
 ```bash
 npm install
 ```
 
-4. Configurez la base de données :
+3. Configurez la base de données :
 ```bash
 # Génère le client Prisma
 npx prisma generate
@@ -45,7 +36,7 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-5. Lancez l'application en mode développement :
+4. Lancez l'application en mode développement :
 ```bash
 npm run dev
 ```
