@@ -11,7 +11,9 @@ services:
       - NODE_ENV=production
       - DATABASE_URL=file:/app/data/dev.db
     volumes:
+      - ./prisma:/app/prisma
       - sqlite_data:/app/data
+    user: "1001:1001"  # Correspond à l'utilisateur nextjs créé dans le Dockerfile
     restart: unless-stopped
 
 volumes:

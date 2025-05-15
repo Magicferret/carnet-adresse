@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+//Page d'accueil. Redirige vers la page des contacts
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-sky-100 to-white p-4 flex-col gap-8">

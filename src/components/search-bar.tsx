@@ -1,5 +1,8 @@
 "use client"
-
+/**
+ * Composant barre de recherche.
+ * Permet de rechercher un contact par nom ou prénom.
+ */
 import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
 

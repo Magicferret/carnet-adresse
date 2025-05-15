@@ -1,5 +1,8 @@
 "use client"
-
+/**
+ * Composant pour les options de tri.
+ * Permet de trier les contacts par nom ou prénom et par ordre croissant ou décroissant.
+ */
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,

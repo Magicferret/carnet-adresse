@@ -1,5 +1,8 @@
 "use client"
-
+/**
+ * Composant pour le bouton de changement de thème.
+ * Permet de basculer entre le thème sombre et le thème clair.
+ */
 import { Button } from "@/components/ui/button"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"

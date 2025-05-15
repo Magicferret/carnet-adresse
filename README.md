@@ -116,6 +116,8 @@ Le projet inclut :
 - `Dockerfile` : Configuration de l'image Docker
 - `docker-compose.yml` : Orchestration des services
 
+![Warning](./warning.png)
+Docker ne fonctionne pas correctement avec la base de données SQLite actuellement.
 ## 📝 License
 
 [MIT](LICENSE)
