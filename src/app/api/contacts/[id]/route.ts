@@ -4,18 +4,20 @@
  */
 import { prisma } from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
-type Params = { params: { id: string } }
+
+type RouteParams = {
+  params: {
+    id: string
+  }
+}
 
 /**
  * GET /api/contacts/[id]
  * Récupère un contact spécifique par son ID.
- * @param {NextRequest} request - Requête entrante
- * @param {Params} params - Paramètres de la route contenant l'ID
- * @returns {Promise<NextResponse>} Contact trouvé ou erreur 404/500
  */
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id: paramId } = await params
+    const { id: paramId } = await Promise.resolve(params)
     const id = parseInt(paramId)
     const contact = await prisma.contact.findUnique({
       where: { id },
@@ -34,13 +36,10 @@ export async function GET(request: NextRequest, { params }: Params) {
 /**
  * PUT /api/contacts/[id]
  * Met à jour un contact existant.
- * @param {NextRequest} request - Requête contenant les nouvelles données
- * @param {Params} params - Paramètres de la route contenant l'ID
- * @returns {Promise<NextResponse>} Contact mis à jour ou erreur 400/500
  */
-export async function PUT(request: NextRequest, { params }: Params) {
+export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id: paramId } = await params
+    const { id: paramId } = await Promise.resolve(params)
     const id = parseInt(paramId)
     const body = await request.json()
     const { firstName, lastName, email, phone, avatarSlug } = body
@@ -63,13 +62,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
 /**
  * DELETE /api/contacts/[id]
  * Supprime un contact par son ID.
- * @param {NextRequest} request - Requête entrante
- * @param {Params} params - Paramètres de la route contenant l'ID
- * @returns {Promise<NextResponse>} 204 si succès ou erreur 500
  */
-export async function DELETE(request: NextRequest, { params }: Params) {
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id: paramId } = await params
+    const { id: paramId } = await Promise.resolve(params)
     const id = parseInt(paramId)
     await prisma.contact.delete({
       where: { id },
