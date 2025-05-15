@@ -7,9 +7,11 @@ sleep 2
 npx prisma migrate deploy
 
 # Vérifier si la base de données existe
-if [ ! -f /app/dev.db ]; then
-  # Si elle n'existe pas, créer la base et donner les bonnes permissions
-  touch /app/dev.db
-  chown nextjs:nodejs /app/dev.db
-  chmod 644 /app/dev.db
+if [ ! -f /app/data/dev.db ]; then
+  echo "Initializing database..."
+  touch /app/data/dev.db
 fi
+
+# Démarrer l'application
+echo "Starting application..."
+exec node server.js

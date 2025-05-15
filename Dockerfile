@@ -43,10 +43,15 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/scripts/init-db.sh ./scripts/init-db.sh
 
 # Ensure the database directory exists and has correct permissions
-RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
+RUN mkdir -p /app/data && \
+    chown -R nextjs:nodejs /app/data
+
+# Copy and setup the init script with correct permissions
+COPY --from=builder /app/scripts/init-db.sh /app/scripts/
+RUN chmod +x /app/scripts/init-db.sh && \
+    chown nextjs:nodejs /app/scripts/init-db.sh
 
 USER nextjs
 
@@ -56,5 +61,5 @@ ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 ENV DATABASE_URL="file:/app/data/dev.db"
 
-# Initialize database and start the application
-CMD ["/bin/bash", "-c", "chmod +x ./scripts/init-db.sh && ./scripts/init-db.sh && node server.js"]
+# Start the application with the init script
+CMD ["/app/scripts/init-db.sh"]
