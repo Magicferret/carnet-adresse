@@ -4,12 +4,12 @@ Une application de gestion de contacts moderne et intuitive, développée avec l
 
 ## 🚀 Technologies Utilisées
 
-- **Next.js 14** : Framework React moderne avec support du Server Side Rendering et des API Routes
-- **TypeScript** : Pour un développement plus robuste et une meilleure maintenabilité
-- **Tailwind CSS** : Framework CSS utility-first pour un design moderne et responsive
-- **Prisma** : ORM moderne pour une gestion simplifiée de la base de données
-- **SQLite** : Base de données légère et performante, parfaite pour le développement
-- **SWC** : Compilateur JavaScript/TypeScript rapide pour optimiser le développement
+- **Next.js 14**
+- **TypeScript**
+- **Tailwind CSS** : Framework CSS
+- **Prisma** : ORM
+- **SQLite** : Base de données
+- **Jest** : Framework de test
 
 ## 🛠️ Installation
 
