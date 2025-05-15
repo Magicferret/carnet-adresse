@@ -6,8 +6,8 @@ import {
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ArrowUpDown, SortAsc, SortDesc } from "lucide-react"
 
@@ -30,7 +30,7 @@ export function SortOptions({ sortField, sortOrder, onSortFieldChange, onSortOrd
       <DropdownMenuContent align="end" className="w-56">
         <div className="p-2">
           <p className="text-sm font-medium mb-2">Sort by</p>
-          <DropdownMenuRadioGroup value={sortField} onValueChange={(value: any) => onSortFieldChange(value)}>
+          <DropdownMenuRadioGroup value={sortField} onValueChange={(value: string) => onSortFieldChange(value as "firstName" | "lastName")}>
             <DropdownMenuRadioItem value="firstName">First Name</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="lastName">Last Name</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
@@ -40,7 +40,7 @@ export function SortOptions({ sortField, sortOrder, onSortFieldChange, onSortOrd
 
         <div className="p-2">
           <p className="text-sm font-medium mb-2">Order</p>
-          <DropdownMenuRadioGroup value={sortOrder} onValueChange={(value: any) => onSortOrderChange(value)}>
+          <DropdownMenuRadioGroup value={sortOrder} onValueChange={(value: string) => onSortOrderChange(value as "asc" | "desc")}>
             <DropdownMenuRadioItem value="asc" className="flex items-center">
               <SortAsc className="mr-2 h-4 w-4" />
               Ascending (A-Z)

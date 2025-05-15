@@ -13,6 +13,8 @@ import type { Contact } from "@/lib/utils"
 import { PlusCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 
+type ContactFormData = Omit<Contact, "id"> & { id?: number }
+
 export default function AddressBook() {
   // États pour la gestion des contacts et des filtres
   const [contacts, setContacts] = useState<Contact[]>([])
@@ -65,7 +67,7 @@ export default function AddressBook() {
   /**
    * Gère l'ajout d'un nouveau contact
    */
-  const handleAddContact = async (contact: Omit<Contact, "id">) => {
+  const handleAddContact = async (contact: ContactFormData) => {
     try {
       const response = await fetch("/api/contacts", {
         method: "POST",
@@ -85,7 +87,9 @@ export default function AddressBook() {
   /**
    * Gère la mise à jour d'un contact existant
    */
-  const handleUpdateContact = async (updatedContact: Contact) => {
+  const handleUpdateContact = async (updatedContact: ContactFormData) => {
+    if (!updatedContact.id) return
+
     try {
       const response = await fetch(`/api/contacts/${updatedContact.id}`, {
         method: "PUT",

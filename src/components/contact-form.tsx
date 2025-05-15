@@ -14,20 +14,23 @@ import { X } from "lucide-react"
 import { useState } from "react"
 import { AvatarSelector } from "./avatar-selector"
 
+type ContactFormData = Omit<Contact, "id"> & { id?: number }
+
 interface ContactFormProps {
   contact?: Contact | null  // Contact existant en cas de modification
-  onSubmit: (contact: any) => void
+  onSubmit: (contact: ContactFormData) => void
   onCancel: () => void
 }
 
 export function ContactForm({ contact, onSubmit, onCancel }: ContactFormProps) {
   // État local du formulaire initialisé avec les données du contact ou des valeurs vides
-  const [formData, setFormData] = useState<Partial<Contact>>({
+  const [formData, setFormData] = useState<ContactFormData>({
     firstName: contact?.firstName || "",
     lastName: contact?.lastName || "",
     email: contact?.email || "",
     phone: contact?.phone || "",
     avatarSlug: contact?.avatarSlug || null,
+    ...(contact?.id ? { id: contact.id } : {})
   })
 
   /**
@@ -43,8 +46,7 @@ export function ContactForm({ contact, onSubmit, onCancel }: ContactFormProps) {
    */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Ajoute l'ID si c'est une modification
-    onSubmit(contact ? { ...formData, id: contact.id } : formData)
+    onSubmit(formData)
   }
 
   return (

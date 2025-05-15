@@ -15,7 +15,7 @@ export async function GET() {
   try {
     const contacts = await prisma.contact.findMany()
     return NextResponse.json(contacts)
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Erreur lors de la récupération des contacts" }, { status: 500 })
   }
 }
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json(contact, { status: 201 })
-  } catch (error) {
-    return NextResponse.json({ error: "Erreur lors de la création du contact" }, { status: 500 })
+  } catch {
+        return NextResponse.json({ error: "Erreur lors de la création du contact" }, { status: 500 })
   }
 }

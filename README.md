@@ -115,7 +115,6 @@ docker-compose down
 Le projet inclut :
 - `Dockerfile` : Configuration de l'image Docker
 - `docker-compose.yml` : Orchestration des services
-- Variables d'environnement configurées pour Docker
 
 ## 📝 License
 
